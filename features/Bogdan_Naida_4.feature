@@ -1,15 +1,14 @@
 Feature: Job search
 
   Background:
-    Given user has hovered the cursor over "Careers" nav
-    And user has clicked "Search jobs" button
+    Given user have opened Careers page
 
-  Scenario: user searches the job in Los Angeles
-    Given I have selected Los Angeles, CA as Location
-    When I clicks "Find" button
-    Then I should see only LA, CA,US or remote offers.
+  Scenario: user searches the job as React Developer
+    Given I have typed React keyword
+    When I clicks Find button
+    Then I should see offers.
 
-  Scenario: user searches remote job
-    Given I have checked the "Open to Relocation" button
-    When I clicks "Find" button
-    Then I should see only remote offers.
+  Scenario: user searches job without preferences.
+    Given I have cleared keyword input.
+    When I clicks Find button
+    Then I should see offers.
