@@ -8,12 +8,12 @@ class AboutPage extends BasePage {
         this.ourOffices = new Offices(element(by.css(".tabs-ui")));
     }
 
-    getCountryList() {
-        return this.ourOffices.getCountryList();
+    async getCountryList() {
+        return await this.ourOffices.getCountryList();
     }
 
-    changeRegion(region){
-        return this.ourOffices.changeRegion(region);
+    async changeRegion(region){
+        return await this.ourOffices.changeRegion(region);
     }
 }
 
