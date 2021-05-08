@@ -8,13 +8,13 @@ chai.use(chaiAsPromised);
 let expect = chai.expect;
 let page;
 
-Given(/^User has opened About page at EPAM's website$/,{timeout: 2 * 5000}, async() => {
+Given(/^User has opened About page at EPAM's website$/,{timeout: 20000}, async() => {
     page = new AboutPage();
     await browser.get("https://www.epam.com/about");
     await page.acceptCookies();
 });
 
-Given(/^I open CIS offices$/,{timeout: 10000}, async () => {
+Given(/^I open CIS offices$/,{timeout: 20000}, async () => {
     await page.changeRegion("CIS");
 });
 
