@@ -12,7 +12,7 @@ exports.config = {
         ]
     },
     onPrepare: async () => {
-        browser.manage().window().setSize(1600,1000);
+        browser.driver.manage().window().maximize();
         await browser.waitForAngularEnabled(false);
     },
 };
