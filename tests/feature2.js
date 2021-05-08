@@ -1,25 +1,37 @@
-let {Then} = require('@cucumber/cucumber');
-let {When} = require('@cucumber/cucumber');
-let {Given} = require('@cucumber/cucumber');
+let {Then, When, Given} = require('@cucumber/cucumber');
+let ContactUsPage = require("../pageobjects/pages/ContactUsPage")
+let {browser} = require("protractor");
+let chai = require("chai")
+let chaiAsPromised = require("chai-as-promised")
 
-Given(/^user has clicked "([^"]*)" button in the navbar\.$/, function () {
+chai.use(chaiAsPromised);
+let expect = chai.expect;
+let page;
 
+Given(/^User has opened Contact Us page at EPAM's website$/, {timeout: 10000}, async () => {
+    page = new ContactUsPage();
+    await browser.get("https://www.epam.com/about/who-we-are/contact");
+    await page.acceptCookies();
 });
-Given(/^scrolled down to the form$/, function () {
 
+Given(/^there are uncompleted (.*) field in the form$/, {timeout: 10000},async(arg) => {
+    await page.clearField(arg);
 });
-Given(/^there are uncompleted (.*) field in the form$/, function () {
 
+When(/^I clicks Submit button$/, async() => {
+    await page.submitForm();
 });
-When(/^I clicks "([^"]*)" button$/, function () {
 
+Then(/^(.*) field's border color becomes red colored$/, async (arg) => {
+    let borderColor = await page.getFieldBorderColor(arg);
+    expect(borderColor.toString()).to.equal("rgb(241, 92, 67)");
 });
-Then(/^(.*) field's border color becomes red colored$/, function () {
 
+Given(/^there are unchecked I consent my personal information tick$/, async () => {
+    await page.unCheckedTick();
 });
-Given(/^there are unchecked "([^"]*)" tick$/, function () {
 
-});
-Then(/^"([^"]*)" tick's border becomes Red colored$/, function () {
-
+Then(/^I consent my personal information tick's border becomes Red colored$/, async () => {
+    let borderColor = await page.getTickerBorderColor();
+    expect(borderColor.toString()).to.equal("rgb(0, 0, 0)");
 });

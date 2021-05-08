@@ -1,21 +1,36 @@
-let {Then} = require('@cucumber/cucumber');
-let {Given} = require('@cucumber/cucumber');
+let {Then, When, Given} = require('@cucumber/cucumber');
+let CareersPage = require("../pageobjects/pages/CareersPage")
+let {browser} = require("protractor");
 
-Given(/^user has hovered the cursor over "([^"]*)" nav$/, function () {
+let chai = require("chai")
+let chaiAsPromised = require("chai-as-promised")
 
+chai.use(chaiAsPromised);
+let expect = chai.expect;
+let page;
+
+
+Given(/^user have opened Careers page$/,{timeout: 10000}, async () => {
+    page = new CareersPage();
+    await page.openPage("https://www.epam.com/careers");
+    await page.acceptCookies();
 });
-Given(/^user has clicked "([^"]*)" button$/, function () {
 
+Given(/^I have selected Los Angeles, CA as Location$/,{timeout: 10000},  async () => {
+    await page.selectLosAngeles();
 });
-Given(/^I have selected Los Angeles, CA as Location$/, function () {
 
+Given(/^I have typed React keyword$/, {timeout: 10000}, async () =>{
+    await page.searchJob("react");
 });
-Then(/^I should see only LA, CA,US or remote offers\.$/, function () {
 
+When(/^I clicks Find button$/,{timeout: 10000},  async () =>{
+    await page.clickSearchButton();
 });
-Given(/^I have checked the "([^"]*)" button$/, function () {
-
+Then(/^I should see offers\.$/,{timeout: 10000},  async () => {
+    let exists = await page.findSearchResultBlock();
+    expect(exists).to.equal(true);
 });
-Then(/^I should see only remote offers\.$/, function () {
-
+Given(/^I have cleared keyword input\.$/,{timeout: 10000}, async () => {
+    await page.searchJob("");
 });
