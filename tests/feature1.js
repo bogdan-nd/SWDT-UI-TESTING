@@ -32,6 +32,6 @@ Given(/^I open offices, that are located in Europe$/,{timeout: 10000}, async () 
     await page.changeRegion("EUROPE");
 });
 
-Then(/^I should see Ukraine in this list\.$/, function () {
+Then(/^I should see Ukraine in this list\.$/,{timeout: 10000}, function () {
     expect(countryList.includes("UKRAINE")).to.equal(true);
 });

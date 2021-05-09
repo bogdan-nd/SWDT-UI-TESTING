@@ -5,9 +5,9 @@ class Offices extends BaseFragment {
     constructor(rootElement) {
         super(rootElement);
         this.rootElement = rootElement;
-        this.tabSelector = ".tabs__item.active";
-        this.countrySelector = ".locations-viewer__country-btn";
-        this.nextCountryButtonSelector = ".owl-next";
+        this.tabSelector = by.css(".tabs__item.active");
+        this.countrySelector = by.css(".locations-viewer__country-btn");
+        this.nextCountryButtonSelector = by.css(".owl-next");
     }
 
     async changeRegion(region) {
@@ -18,15 +18,14 @@ class Offices extends BaseFragment {
     }
 
     async getCountryList() {
-        let tab = element(by.css(this.tabSelector));
-        //await browser.wait(ExpectedConditions.presenceOf($$(".tabs__item.active").$$(".locations-viewer__country-name")), 10000);
+        let tab = element(this.tabSelector);
         let countries = [];
-        let nextCountryButton = await tab.element(by.css(this.nextCountryButtonSelector));
+        let nextCountryButton = await tab.element(this.nextCountryButtonSelector);
         let currentCountries;
         let checker = (arr, target) => target.every(el => arr.includes(el));
 
         while (true) {
-            let current_countries_list = await tab.all(by.css(this.countrySelector)).map(el => el.getText().then(text => text));
+            let current_countries_list = await tab.all(this.countrySelector).map(el => el.getText().then(text => text));
             currentCountries = current_countries_list.filter(title => title !== "");
             if (checker(countries, currentCountries))
                 break;

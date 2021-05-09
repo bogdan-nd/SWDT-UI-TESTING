@@ -2,7 +2,7 @@ let {browser,element,ExpectedConditions} = require("protractor");
 
 class BasePage {
     constructor() {
-        this.cookieButtonSelector = ".button-ui.bg-color-light-blue.cookie-disclaimer__button";
+        this.cookieButtonSelector = by.css(".button-ui.bg-color-light-blue.cookie-disclaimer__button");
     }
 
     async openPage(url) {
@@ -16,8 +16,8 @@ class BasePage {
 
     async acceptCookies() {
         try {
-            await browser.wait(ExpectedConditions.elementToBeClickable(element(by.css(this.cookieButtonSelector))), 5000);
-            let element_ = element(by.css(this.cookieButtonSelector));
+            await browser.wait(ExpectedConditions.elementToBeClickable(element(this.cookieButtonSelector)), 5000);
+            let element_ = element(this.cookieButtonSelector);
             await element_.click();
         } catch (e) {
         }

@@ -16,10 +16,6 @@ Given(/^user have opened Careers page$/,{timeout: 10000}, async () => {
     await page.acceptCookies();
 });
 
-Given(/^I have selected Los Angeles, CA as Location$/,{timeout: 10000},  async () => {
-    await page.selectLosAngeles();
-});
-
 Given(/^I have typed React keyword$/, {timeout: 10000}, async () =>{
     await page.searchJob("react");
 });

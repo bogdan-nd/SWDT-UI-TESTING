@@ -22,16 +22,16 @@ When(/^I choose Ukrainian$/, {timeout: 10000}, async () => {
     await page.chooseUkrainian();
 });
 
-Then(/^I see main page on Ukrainian$/, async () => {
+Then(/^I see main page on Ukrainian$/,{timeout: 10000}, async () => {
     let new_title = await page.getTitle();
     expect(new_title).to.equal("EPAM Ukraine - найбільша ІТ-компанія в Україні | Вакансії");
 });
 
-
-When(/^I clicks Insights page$/, async () => {
+When(/^I clicks Insights page$/,{timeout: 10000}, async () => {
     await page.clickInsightsButton();
 });
-Then(/^Insights page opens$/, async () =>{
+
+Then(/^Insights page opens$/, {timeout: 10000},async () =>{
     let new_title = await page.getTitle();
     expect(new_title).to.equal("Discover our Latest Insights | EPAM");
 });
